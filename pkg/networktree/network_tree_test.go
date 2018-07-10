@@ -37,3 +37,25 @@ func TestTreeHeight(t *testing.T) {
 		assert.Equal(t, height, tree.Height())
 	}
 }
+
+func TestTreeFind(t *testing.T) {
+	results := map[string]bool{
+		"192.168.0.0/24":   true,
+		"192.168.0.128/25": true,
+		"192.128.0.0/24":   false,
+	}
+	tree, err := New("192.168.0.0/16")
+	assert.Nil(t, err)
+
+	for cidr, shouldFind := range results {
+		_, n, err := net.ParseCIDR(cidr)
+		assert.Nil(t, err)
+
+		if shouldFind {
+			assert.NotNil(t, tree.Find(n))
+		} else {
+			assert.Nil(t, tree.Find(n))
+		}
+	}
+
+}
