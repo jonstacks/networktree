@@ -58,7 +58,7 @@ func (t *Tree) Height() int {
 
 // Find finds the given node whose network has the given CIDR
 func (t *Tree) Find(net *net.IPNet) *Tree {
-	if bytes.Equal(t.Value.IP, net.IP) && bytes.Equal(t.Value.Mask, net.Mask) {
+	if t.Value.IP.Equal(net.IP) && bytes.Equal(t.Value.Mask, net.Mask) {
 		return t
 	}
 
