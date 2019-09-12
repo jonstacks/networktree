@@ -23,3 +23,13 @@ func TestSplitNetwork(t *testing.T) {
 		assert.Equal(t, subnets[1], s2.String())
 	}
 }
+
+func TestSplitNetworkWithSingleIP(t *testing.T) {
+	_, n, err := net.ParseCIDR("10.0.0.1/32")
+	assert.NoError(t, err)
+
+	sub1, sub2 := SplitNetwork(n)
+	assert.Nil(t, sub1)
+	assert.Nil(t, sub2)
+}
+

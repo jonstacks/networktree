@@ -59,3 +59,19 @@ func TestTreeFind(t *testing.T) {
 	}
 
 }
+
+func TestTreeBadCidr(t *testing.T) {
+	_, err := New("not-a-cidr")
+	assert.Error(t, err)
+}
+
+func TestUnusedRanges(t *testing.T) {
+	tree, err := New("192.168.1.0/24")
+	assert.NoError(t, err)
+
+	tree.Left.MarkUsed()
+
+	ranges := tree.UnusedRanges()
+	assert.Len(t, ranges, 1)
+	assert.Equal(t, "192.168.1.128/25", ranges[0].String())
+}
