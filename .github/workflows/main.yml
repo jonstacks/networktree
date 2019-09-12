@@ -4,6 +4,7 @@ jobs:
   test:
     name: test
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
     - uses: actions/setup-go@v1
       with:
