@@ -77,7 +77,6 @@ func (t *Tree) Find(net *net.IPNet) *Tree {
 
 // MarkUsed marks a tree as being used
 func (t *Tree) MarkUsed() {
-	// fmt.Printf("Marking %s as used\n", t.Value.String())
 	t.InUse = true
 	if t.Left != nil {
 		t.Left.MarkUsed()
