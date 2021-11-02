@@ -1,8 +1,8 @@
-name: Network Tree
+name: CI
 on: [push, pull_request]
 jobs:
   test:
-    name: test
+    name: Test
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
